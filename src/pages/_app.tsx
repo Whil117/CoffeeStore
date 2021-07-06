@@ -1,6 +1,6 @@
 import type { AppProps } from "next/app";
-import { Global, css } from "@emotion/react";
 import Head from "next/head";
+import { Global, css } from "@emotion/react";
 
 const Normalize = `
   body{
@@ -9,7 +9,7 @@ const Normalize = `
   }
 `;
 
-function MyApp({ Component, pageProps }: AppProps) {
+const MyApp = ({ Component, pageProps }: AppProps) => {
   return (
     <>
       <Head>
@@ -25,6 +25,11 @@ function MyApp({ Component, pageProps }: AppProps) {
           href="https://fonts.googleapis.com/css2?family=Inter&display=swap"
           rel="stylesheet"
         />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Sedgwick+Ave&display=swap"
+          rel="stylesheet"
+        />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
       <Global
         styles={css`
@@ -34,5 +39,5 @@ function MyApp({ Component, pageProps }: AppProps) {
       <Component {...pageProps} />
     </>
   );
-}
+};
 export default MyApp;

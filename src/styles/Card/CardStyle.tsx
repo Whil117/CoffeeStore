@@ -40,6 +40,7 @@ export const CardsMain = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin: 0 0 50px 0;
   button {
     display: flex;
     align-items: center;
@@ -57,7 +58,9 @@ export const CardsMain = styled.div`
     font-size: 18px;
   }
 `;
-
+export const CardErrorCheck = styled.p`
+  color: red;
+`
 export const CardBuyDiv = styled.div`
   position: fixed;
   top: 0;
@@ -87,7 +90,7 @@ export const CardBuy = styled.div`
   }
 `;
 interface Mode {
-  mode:Boolean
+  mode:string
 }
 export const CardBuyButton = styled.button<Mode>`
   display: flex;
@@ -99,5 +102,5 @@ export const CardBuyButton = styled.button<Mode>`
   border-radius: 5px;
   border: none;
   color: white;
-  background: ${({ mode }) => (mode ? "#DA2525" : "#31B82E")};
+  background: ${({ mode }) => (mode === "true" ? "#DA2525" : "#31B82E")};
 `;

@@ -6,29 +6,26 @@ import {
   CardBuy,
   CardBuyButton,
   CardBuyDiv,
+  CardErrorCheck,
   CardsMain,
 } from "../../../styles/Card/CardStyle";
 
 interface Props {
   initCoins: number;
 }
+interface Coffee {
+  Coffee: string;
+  Type: string;
+  With: string;
+  Grind: string;
+  Week: string;
+}
 
 const Main: React.FC<Props> = ({ initCoins }) => {
   const [coins, setcoins] = useState(initCoins);
-  const [user, setUser] = useState({
-    username: "",
-    password: "",
-  });
-  const [coffee, setCoffee] = useState({
-    Coffee: "",
-    Type: "",
-    With: "",
-    Grind: "",
-    Week: "",
-  });
+  const [coffee, setCoffee] = useState<Coffee>({} as Coffee);
   const [show, setShow] = useState(false);
-  const [error, setError] = useState(false);
-  const { Coffee, Type, With, Grind, Week, titles } = Category;
+  const [error, setError] = useState("");
 
   const handleCheck = (event: any) => {
     setCoffee({
@@ -38,10 +35,24 @@ const Main: React.FC<Props> = ({ initCoins }) => {
   };
   const handleBuy = () => {
     if (coins > 0) {
-      setShow(false)
+      setShow(false);
       setcoins(coins - 100);
     } else {
-      setError(true);
+      setError("error_coins");
+    }
+  };
+  const handleCheckCards = () => {
+    if (
+      coffee.Coffee &&
+      coffee.Type &&
+      coffee.With &&
+      coffee.Grind &&
+      coffee.Week
+    ) {
+      setShow(true);
+      setError("");
+    } else {
+      setError("error_form");
     }
   };
 
@@ -54,21 +65,9 @@ const Main: React.FC<Props> = ({ initCoins }) => {
     localStorage.setItem("COINS", JSON.stringify(coins));
   }, [coins]);
 
-  useEffect(() => {
-    const data: string | null = localStorage.getItem("mycount");
-    if (data) {
-      setUser(JSON.parse(data));
-    }
-  }, []);
-  console.log(coffee);
   return (
     <>
-      <NavBar
-        coins={coins}
-        initC={initCoins}
-        setcoins={setcoins}
-        username={user.username}
-      />
+      <NavBar coins={coins} initC={initCoins} setcoins={setcoins} />
       <CardsMain>
         <Cards
           check={coffee.Coffee}
@@ -76,8 +75,8 @@ const Main: React.FC<Props> = ({ initCoins }) => {
           handleCheck={handleCheck}
           width="true"
           flow="true"
-          title={titles[0]}
-          category={Coffee}
+          title={Category.titles[0]}
+          category={Category.Coffee}
         />
         <Cards
           check={coffee.Type}
@@ -85,8 +84,8 @@ const Main: React.FC<Props> = ({ initCoins }) => {
           handleCheck={handleCheck}
           width="false"
           flow="false"
-          title={titles[1]}
-          category={Type}
+          title={Category.titles[1]}
+          category={Category.Type}
         />
         <Cards
           check={coffee.With}
@@ -94,8 +93,8 @@ const Main: React.FC<Props> = ({ initCoins }) => {
           handleCheck={handleCheck}
           width="false"
           flow="false"
-          title={titles[2]}
-          category={With}
+          title={Category.titles[2]}
+          category={Category.With}
         />
         <Cards
           check={coffee.Grind}
@@ -103,8 +102,8 @@ const Main: React.FC<Props> = ({ initCoins }) => {
           handleCheck={handleCheck}
           width="false"
           flow="false"
-          title={titles[3]}
-          category={Grind}
+          title={Category.titles[3]}
+          category={Category.Grind}
         />
         <Cards
           check={coffee.Week}
@@ -112,28 +111,33 @@ const Main: React.FC<Props> = ({ initCoins }) => {
           handleCheck={handleCheck}
           width="false"
           flow="false"
-          title={titles[4]}
-          category={Week}
+          title={Category.titles[4]}
+          category={Category.Week}
         />
-        <button onClick={() => {
-          setShow(true)
-          setError(false)
-          }}>Buy</button>
+        <button onClick={handleCheckCards}>Buy</button>
+        {error === "error_form" && (
+          <CardErrorCheck>
+            <b>Finish the form</b>
+          </CardErrorCheck>
+        )}
       </CardsMain>
       {show && (
         <CardBuyDiv>
           <CardBuy>
             <h2>¿Do you want to buy this coffee?</h2>
-            {error && (
+            {error === "error_coins" && (
               <p>
                 <b>You have no coins</b>
               </p>
             )}
             <div>
-              <CardBuyButton onClick={() => setShow(false)} mode={true}>
+              <CardBuyButton
+                onClick={() => setShow(false)}
+                mode={true.toString()}
+              >
                 Cancel
               </CardBuyButton>
-              <CardBuyButton onClick={handleBuy} mode={false}>
+              <CardBuyButton onClick={handleBuy} mode={false.toString()}>
                 Acept
               </CardBuyButton>
             </div>
