@@ -1,11 +1,15 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable @next/next/no-img-element */
 import React, { useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import Link from "next/link";
 import Form from "../../../components/Form/Form";
 import BackButton from "../../../../public/Images/arrow.svg";
-import { SignButton, SignInfo, SignMain } from "../../../styles/SignUp/SignUpStyle";
+import {
+  SignButton,
+  SignInfo,
+  SignMain,
+} from "../../../styles/SignUp/SignUpStyle";
 
 interface Count {
   username: string;
@@ -17,10 +21,10 @@ const User = {
 };
 
 const SignUp: React.FC = () => {
-  const [user, setUser] = useState({
+  const [user, setUser] = useState<Count>({
     username: "",
     password: "",
-  });
+  } as Count);
   const [show, setShow] = useState(false);
 
   const router = useRouter();
@@ -32,7 +36,7 @@ const SignUp: React.FC = () => {
     });
   };
 
-  const PostUser = (url: string) => {
+  const useFetch = (url: string) => {
     fetch(url, {
       method: "POST",
       headers: {
@@ -43,33 +47,20 @@ const SignUp: React.FC = () => {
     })
       .then((resp) => resp.json())
       .then((data) => {
-        const userData = JSON.stringify(data);
-        localStorage.setItem("token", userData);
-        console.log(userData);
-      });
+        console.log(data);
+        router.replace('/App/Main/Main')
+        localStorage.setItem('token',data?.token)
+      })
+      .catch(error=>console.log(error))
   };
 
   const handleSubmit = (evt: any) => {
     evt.preventDefault();
-    console.log('send')
-    // if (localStorage.getItem("token")) {
-    //   const userData = JSON.parse(localStorage.getItem("token") || "{}");
-    //   localStorage.setItem(
-    //     "token",
-    //     JSON.stringify({
-    //       ...userData,
-    //       auth: true,
-    //     })
-    //   );
-    //   setTimeout(() => {
-    //     router.push("/");
-    //   }, 2000);
-    // } else {
-    //   PostUser("http://localhost:8000/register");
-    //   setTimeout(() => {
-    //     router.push("/");
-    //   }, 2000);
-    // }
+    if (show) {
+      useFetch('https://coffeeapi11.herokuapp.com/signin')
+    }else{
+      useFetch('https://coffeeapi11.herokuapp.com/signup')
+    }
   };
   const handleModeSign = () => {
     if (show) {
@@ -83,13 +74,13 @@ const SignUp: React.FC = () => {
   return (
     <SignMain>
       {show ? (
-        <img src="/Images/1.jpg" alt="logo1" />
-      ) : (
         <img src="/Images/2.jpg" alt="logo1" />
+      ) : (
+        <img src="/Images/1.jpg" alt="logo1" />
       )}
       <SignInfo>
         <div>
-          <button onClick={() => router.back()}>
+          <button onClick={() => router.push("/")}>
             <Image src={BackButton} alt="back" />
           </button>
         </div>
@@ -97,20 +88,20 @@ const SignUp: React.FC = () => {
           {show ? (
             <Form
               user={user}
-              btnname="Sign Up"
+              btnname="Sign In"
               handleSubmit={handleSubmit}
               handleChange={handleChange}
             />
           ) : (
             <Form
               user={user}
-              btnname="Sign In"
+              btnname="Sign Up"
               handleSubmit={handleSubmit}
               handleChange={handleChange}
             />
           )}
           <SignButton onClick={handleModeSign}>
-            {show ? "Sign In" : "Sign Up"}
+            {show ? "Sign Up" : "Sign In"}
           </SignButton>
         </div>
       </SignInfo>

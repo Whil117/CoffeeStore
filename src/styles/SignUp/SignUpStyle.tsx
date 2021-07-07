@@ -1,5 +1,4 @@
 import styled from "@emotion/styled";
-import Image from "next/image";
 
 export const SignMain = styled.main`
   width: 100%;
@@ -16,11 +15,15 @@ export const SignForm = styled.form`
     width: 239px;
     height: 35px;
     background: #ffffff;
-    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.25);
+    box-shadow: 0px 0px 8px 1px rgba(0, 0, 0, 0.25);
     border-radius: 5px;
     margin: 0 0 30px 0;
     font-family: Inter;
     font-size: 14px;
+    &:hover{
+      background: white;
+      box-shadow: 0px 0px 5px #379869;
+    }
   }
   button {
     color: white;
@@ -31,7 +34,7 @@ export const SignForm = styled.form`
     padding: 10px 64px;
     width: 239px;
     height: 35px;
-    background: #0d8684;
+    background: #379869;
     border-radius: 5px;
     font-family: Inter;
     font-style: normal;
@@ -39,8 +42,8 @@ export const SignForm = styled.form`
     font-size: 18px;
     &:hover {
       background: white;
-      color: #0d8684;
-      box-shadow: 0px 0px 5px #0d8684;
+      color: rgb(55, 152, 105);
+      box-shadow: 0px 0px 5px #379869;
     }
   }
   label {
@@ -67,7 +70,7 @@ export const SignInfo = styled.div`
     font-style: normal;
     font-weight: bold;
     font-size: 48px;
-    color: #0d8684;
+    color: #379869;
   }
   div:nth-of-type(1) {
     display: flex;

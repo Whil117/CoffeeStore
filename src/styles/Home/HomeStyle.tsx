@@ -31,9 +31,9 @@ export const HomeArt = styled.div`
       height: 42px;
       background: #379869;
       border-radius: 5px;
-      font-family: Inter;
       font-style: normal;
       font-weight: bold;
+      font-family: Inter;
       font-size: 14px;
       color: white;
       &:hover{

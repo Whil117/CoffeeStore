@@ -17,7 +17,7 @@ const Home: React.FC = () => {
               tenetur vitae eos similique ad officiis doloremque deleniti animi!
               Quibusdam, velit voluptas?
             </p>
-            <button onClick={() => router.push("/")}>Let’s Start to CoffeeStore</button>
+            <button onClick={() => router.replace("./App/Sign/Sign")}>Let’s Start to CoffeeStore</button>
           </div>
         </HomeArt>
         <div>
