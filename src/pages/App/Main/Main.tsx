@@ -36,7 +36,13 @@ const methodGet = {
 const Main: React.FC = () => {
   const [coins, setcoins] = useState(100);
   const [user, setUser] = useState<User>({} as User);
-  const [coffee, setCoffee] = useState<Coffee>({} as Coffee);
+  const [coffee, setCoffee] = useState<Coffee>({
+    Coffee:'',
+    Type:'',
+    With:'',
+    Grind:'',
+    Week:''
+  } as Coffee);
   const [show, setShow] = useState(false);
   const [msg, setMsg] = useState("");
 

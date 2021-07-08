@@ -24,25 +24,25 @@ const SelectCards: React.FC<Props> = ({ coffee,handleCheck,Category }) => {
   return (
     <>
       <Cards
-        check={coffee.Coffee}
+        check={coffee?.Coffee}
         name="Coffee"
         handleCheck={handleCheck}
         width="true"
         flow="true"
-        title={Category.titles[0]}
-        category={Category.Coffee}
+        title={Category?.titles[0]}
+        category={Category?.Coffee}
       />
       <Cards
-        check={coffee.Type}
+        check={coffee?.Type}
         name="Type"
         handleCheck={handleCheck}
         width="false"
         flow="false"
-        title={Category.titles[1]}
-        category={Category.Type}
+        title={Category?.titles[1]}
+        category={Category?.Type}
       />
       <Cards
-        check={coffee.With}
+        check={coffee?.With}
         name="With"
         handleCheck={handleCheck}
         width="false"
@@ -51,22 +51,22 @@ const SelectCards: React.FC<Props> = ({ coffee,handleCheck,Category }) => {
         category={Category.With}
       />
       <Cards
-        check={coffee.Grind}
+        check={coffee?.Grind}
         name="Grind"
         handleCheck={handleCheck}
         width="false"
         flow="false"
-        title={Category.titles[3]}
-        category={Category.Grind}
+        title={Category?.titles[3]}
+        category={Category?.Grind}
       />
       <Cards
-        check={coffee.Week}
+        check={coffee?.Week}
         name="Week"
         handleCheck={handleCheck}
         width="false"
         flow="false"
-        title={Category.titles[4]}
-        category={Category.Week}
+        title={Category?.titles[4]}
+        category={Category?.Week}
       />
     </>
   );
