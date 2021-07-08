@@ -11,7 +11,7 @@ const MainApp = styled.main`
 const App: FC = () => {
   return (
     <MainApp>
-      <Nav mode={true} coins={false}  setcoins={false} username={''}/>
+      <Nav mode={true} coins={false}  setcoins={false} username={''} ModeCoins={false}/>
       <Home />
       <Slider/>
     </MainApp>

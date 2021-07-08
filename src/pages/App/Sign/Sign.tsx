@@ -43,8 +43,10 @@ const SignUp: React.FC = () => {
     })
       .then((resp) => resp.json())
       .then((data) => {
-        localStorage.setItem("token", data?.token);
-        router.replace("/App/Main/Main");
+        if (data.token) {
+          localStorage.setItem("token", data?.token);
+          router.replace("/App/Main/Main");
+        }
       })
       .catch((error) => console.log(error));
   };
@@ -107,15 +109,16 @@ const SignUp: React.FC = () => {
           <SignButton onClick={handleModeSign}>
             {show ? "Sign Up" : "Sign In"}
           </SignButton>
-          {events === "form" && (
+          {(events === "form" && (
             <p className="err">
               <b>Complete the form</b>
             </p>
-          ) || events === "send" && (
-            <p className="send">
-              <b>Send Data</b>
-            </p>
-          )}
+          )) ||
+            (events === "send" && (
+              <p className="send">
+                <b>Send Data</b>
+              </p>
+            ))}
         </div>
       </SignInfo>
     </SignMain>

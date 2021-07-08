@@ -11,6 +11,7 @@ import {
   CardsMain,
 } from "../../../styles/Card/CardStyle";
 import { methodGet } from "./assets/methods";
+import SelectCards from "./components/SelectCards";
 
 interface Coffee {
   Coffee: string;
@@ -26,11 +27,6 @@ interface User {
     username: any;
   };
 }
-const tokenLocal = () => {
-  if (typeof window !== "undefined") {
-    return localStorage.getItem("token") || "";
-  }
-};
 const Main: React.FC = () => {
   const [coins, setcoins] = useState(100);
   const [user, setUser] = useState<User>({} as User);
@@ -61,10 +57,6 @@ const Main: React.FC = () => {
 
   const methodPost = {
     method: "POST",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    },
     body: JSON.stringify(coffee),
   };
 
@@ -81,31 +73,30 @@ const Main: React.FC = () => {
     const data = await resp.json();
     return data;
   };
-  
+
   const handleBuy = () => {
-    if (coins > 0) {
-      setShow(false);
-      setcoins(coins - 10);
-      setMsg("datasend");
-      const info = useFetchData("data", methodPost).then((data) =>console.log(data))
-    } else {
-      setMsg("error_coins");
-    }
+    const isValidCoins =
+      coins > 0
+        ? (setShow(false),
+          setcoins(coins - 10),
+          useFetchData("data", methodPost)
+            .then((data) => (data ? setMsg("datasend") : false))
+            .catch((err) => console.log(err)))
+        : setMsg("error_coins");
+    return isValidCoins;
   };
   useEffect(() => {
     const validInfo = Number(localStorage.getItem("COINS") || 0);
     setcoins(validInfo);
+    useFetchData("me", methodGet)
+      .then((data) => setUser(data))
+      .catch((err) => console.log(err));
   }, []);
 
   useEffect((): void => {
     localStorage.setItem("COINS", JSON.stringify(coins));
   }, [coins]);
 
-  useEffect(() => {
-    const data = useFetchData("me", methodGet)
-      .then((data) => setUser(data))
-      .catch((err) => console.log(err));
-  }, []);
   return (
     <>
       {user.auth ? (
@@ -115,52 +106,13 @@ const Main: React.FC = () => {
             coins={coins}
             username={user.user.username}
             setcoins={setcoins}
+            ModeCoins={true}
           />
           <CardsMain>
-            <Cards
-              check={coffee.Coffee}
-              name="Coffee"
+            <SelectCards
+              coffee={coffee}
               handleCheck={handleCheck}
-              width="true"
-              flow="true"
-              title={Category.titles[0]}
-              category={Category.Coffee}
-            />
-            <Cards
-              check={coffee.Type}
-              name="Type"
-              handleCheck={handleCheck}
-              width="false"
-              flow="false"
-              title={Category.titles[1]}
-              category={Category.Type}
-            />
-            <Cards
-              check={coffee.With}
-              name="With"
-              handleCheck={handleCheck}
-              width="false"
-              flow="false"
-              title={Category.titles[2]}
-              category={Category.With}
-            />
-            <Cards
-              check={coffee.Grind}
-              name="Grind"
-              handleCheck={handleCheck}
-              width="false"
-              flow="false"
-              title={Category.titles[3]}
-              category={Category.Grind}
-            />
-            <Cards
-              check={coffee.Week}
-              name="Week"
-              handleCheck={handleCheck}
-              width="false"
-              flow="false"
-              title={Category.titles[4]}
-              category={Category.Week}
+              Category={Category}
             />
             <button onClick={handleCheckCards}>Buy</button>
             {(msg === "error_form" && (

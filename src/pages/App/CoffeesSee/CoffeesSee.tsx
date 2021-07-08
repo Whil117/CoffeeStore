@@ -1,6 +1,4 @@
 /* eslint-disable react/no-unescaped-entities */
-/* eslint-disable jsx-a11y/alt-text */
-/* eslint-disable @next/next/no-img-element */
 /* eslint-disable react-hooks/rules-of-hooks */
 import React, { useState, useEffect } from "react";
 import Coffee from "../../../components/Coffee/Coffee";
@@ -25,40 +23,33 @@ const CoffeesSee: React.FC = () => {
   const [coffees, setCoffees] = useState<Coffee[]>([]);
   const [data, setData] = useState<Data>({} as Data);
 
-  const useFetch = (url: string) => {
-    fetch(url, {
+  const useFetch = async (url: string) => {
+    const resp = await fetch(url, {
       method: "GET",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
         token: `${localStorage.getItem("token") || ""}`,
       },
-    })
-      .then((resp) => resp.json())
-      .then((data) => {
-        setData(data);
-      })
-      .catch((error) => console.log(error));
-  };
-  const useFetchData = (url: string) => {
-    fetch(url, {
-      method: "GET",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        token: `${localStorage.getItem("token") || ""}`,
-      },
-    })
-      .then((resp) => resp.json())
-      .then((data) => setCoffees(data));
+    });
+    const data = await resp.json();
+    return data;
   };
 
   useEffect(() => {
-    useFetchData("https://coffeeapi11.herokuapp.com/data");
-    useFetch("https://coffeeapi11.herokuapp.com/me");
+    if (true) {
+      useFetch("https://coffeeapi11.herokuapp.com/data").then((data) =>
+        setCoffees(data)
+      );
+    }
+    if (true) {
+      useFetch("https://coffeeapi11.herokuapp.com/me").then((data) =>
+        setData(data)
+      );
+    }
   }, []);
 
-  console.log(coffees);
+
   return (
     <>
       {data.auth ? (
@@ -68,9 +59,10 @@ const CoffeesSee: React.FC = () => {
             coins={false}
             setcoins={false}
             username={data.user.username}
+            ModeCoins={false}
           />
           <CoffeeOrders>
-              <h2>Your Order's</h2>
+            <h2>Your Order's</h2>
             <div className="box">
               {coffees ? (
                 <>

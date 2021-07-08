@@ -4,7 +4,7 @@ export const CoffeeBox = styled.div`
     width: 443px;
     height: 205px;
     background: #FFFFFF;
-    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+    box-shadow: 0px 0px 8px 2px rgba(0, 0, 0, 0.25);
     border-radius: 5px;
     display: flex;
     justify-content: space-between;

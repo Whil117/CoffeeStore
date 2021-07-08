@@ -3,7 +3,11 @@ import styled from "@emotion/styled";
 interface Button {
   menu: Boolean;
 }
-
+export const NavMenuDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+`
 export const NavMain = styled.nav`
   display: flex;
   align-items: center;
@@ -19,6 +23,7 @@ export const NavMain = styled.nav`
   }
 `;
 export const NavButton = styled.button<Button>`
+top: 25px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -43,4 +48,41 @@ export const NavButton = styled.button<Button>`
     color: #ffffff;
     background: ${({ menu }) => (menu ? "#379869" : "white")};
   }
+`;
+export const NavMenu = styled.div`
+  width: 150px;
+  height: 197px;
+  background: #FFFFFF;
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 60px;
+`
+type Active = {
+  active: Boolean;
+  leave: Boolean;
+};
+
+export const NavOptionsMenu = styled.div`
+top: 80px;
+  position: absolute;
+  background: #ffffff;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  width: 135px;
+
+`;
+export const NavOptionsButton = styled.button<Active>`
+  border: none;
+  border-radius: 2px;
+  padding: 10px;
+  margin: 5px;
+  color: ${({ active, leave }) =>
+    active ? " white" : "black" && leave ? " white" : "black"};
+  background: ${({ active, leave }) =>
+    active ? " #379869" : "white" && leave ? " red" : "white"};
+    font-size: medium;
 `;
