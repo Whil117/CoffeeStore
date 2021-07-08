@@ -1,7 +1,6 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import React, { useState, useEffect } from "react";
 import { Category } from "../../../assets/data";
-import Cards from "../../../components/Cards/Cards";
 import Nav from "../../../components/Nav/Nav";
 import {
   CardBuy,
@@ -10,7 +9,6 @@ import {
   CardErrorCheck,
   CardsMain,
 } from "../../../styles/Card/CardStyle";
-import { methodGet } from "./assets/methods";
 import SelectCards from "./components/SelectCards";
 
 interface Coffee {
@@ -27,6 +25,14 @@ interface User {
     username: any;
   };
 }
+const methodGet = {
+  method: "GET",
+  headers: {
+    Accept: "application/json",
+    "Content-Type": "application/json",
+  },
+};
+
 const Main: React.FC = () => {
   const [coins, setcoins] = useState(100);
   const [user, setUser] = useState<User>({} as User);
