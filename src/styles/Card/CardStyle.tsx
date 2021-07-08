@@ -19,6 +19,9 @@ export const CardCoins =  styled.div`
   width: 205px;
   justify-content: space-around;
   }
+  button{
+    border: none;
+  }
 `
 export const Card = styled.label<Active>`
   width: 182px;
@@ -32,7 +35,7 @@ export const Card = styled.label<Active>`
   padding: 15px;
   margin: 10px;
   color: ${({ active }) => (active ? "white" : "black")};
-  background: ${({ active }) => (active ? " #0D8684" : "white")};
+  background: ${({ active }) => (active ? " #379869" : "white")};
   p {
     font-family: Inter;
     font-style: normal;
@@ -66,7 +69,7 @@ export const CardsMain = styled.div`
     width: 114px;
     height: 42px;
     color: white;
-    background: #0d8684;
+    background: #379869;
     border-radius: 5px;
     border: none;
     font-family: Inter;
@@ -120,5 +123,5 @@ export const CardBuyButton = styled.button<Mode>`
   border-radius: 5px;
   border: none;
   color: white;
-  background: ${({ mode }) => (mode === "true" ? "#DA2525" : "#31B82E")};
+  background: ${({ mode }) => (mode === "true" ? "#DA2525" : "#379869")};
 `;

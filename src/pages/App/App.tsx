@@ -1,8 +1,8 @@
-import styled from "@emotion/styled";
 import React, {  FC } from "react";
+import Home from "./Home/Home";
 import Nav from "../../components/Nav/Nav";
 import Slider from "../../components/Slider/Slider";
-import Home from "./Home/Home";
+import styled from "@emotion/styled";
 
 const MainApp = styled.main`
   font-family: "Inter", sans-serif;
@@ -11,7 +11,7 @@ const MainApp = styled.main`
 const App: FC = () => {
   return (
     <MainApp>
-      <Nav mode={true} coins={false}  setcoins={false}/>
+      <Nav mode={true} coins={false}  setcoins={false} username={''}/>
       <Home />
       <Slider/>
     </MainApp>

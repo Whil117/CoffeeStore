@@ -1,16 +1,13 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable @next/next/no-img-element */
 import React, { useState } from "react";
-import Image from "next/image";
 import { useRouter } from "next/router";
 import Form from "../../../components/Form/Form";
-import BackButton from "../../../../public/Images/arrow.svg";
 import {
   SignButton,
   SignInfo,
   SignMain,
 } from "../../../styles/SignUp/SignUpStyle";
-
 interface Count {
   username: string;
   password: string;
@@ -21,11 +18,9 @@ const User = {
 };
 
 const SignUp: React.FC = () => {
-  const [user, setUser] = useState<Count>({
-    username: "",
-    password: "",
-  } as Count);
+  const [user, setUser] = useState<Count>(User as Count);
   const [show, setShow] = useState(false);
+  const [events, setEvents] = useState("");
 
   const router = useRouter();
 
@@ -36,7 +31,8 @@ const SignUp: React.FC = () => {
     });
   };
 
-  const useFetch = (url: string) => {
+  const useFetch = (site: string) => {
+    const url = `https://coffeeapi11.herokuapp.com/${site}`;
     fetch(url, {
       method: "POST",
       headers: {
@@ -47,41 +43,49 @@ const SignUp: React.FC = () => {
     })
       .then((resp) => resp.json())
       .then((data) => {
-        console.log(data);
-        router.replace('/App/Main/Main')
-        localStorage.setItem('token',data?.token)
+        localStorage.setItem("token", data?.token);
+        router.replace("/App/Main/Main");
       })
-      .catch(error=>console.log(error))
+      .catch((error) => console.log(error));
   };
 
   const handleSubmit = (evt: any) => {
     evt.preventDefault();
+
     if (show) {
-      useFetch('https://coffeeapi11.herokuapp.com/signin')
-    }else{
-      useFetch('https://coffeeapi11.herokuapp.com/signup')
+      if (user.username && user.password) {
+        useFetch("signin");
+        setEvents("send");
+      } else {
+        setEvents("form");
+      }
+    } else {
+      if (user.username && user.password) {
+        useFetch("signup");
+        setEvents("send");
+      } else {
+        setEvents("form");
+      }
     }
   };
   const handleModeSign = () => {
-    if (show) {
-      setShow(false);
-      setUser(User);
-    } else {
-      setShow(true);
-      setUser(User);
-    }
+    const ModeShow = show
+      ? (setShow(false), setUser(User), setEvents(""))
+      : (setShow(true), setUser(User), setEvents(""));
+    return ModeShow;
   };
+
   return (
     <SignMain>
       {show ? (
-        <img src="/Images/2.jpg" alt="logo1" />
+        <img src="/Images/2.jpg" alt="img2" />
       ) : (
-        <img src="/Images/1.jpg" alt="logo1" />
+        <img src="/Images/1.jpg" alt="img1" />
       )}
       <SignInfo>
         <div>
-          <button onClick={() => router.push("/")}>
-            <Image src={BackButton} alt="back" />
+          <button onClick={() => router.replace("/")}>
+            <img src="/Images/arrow.svg" alt="back" />
           </button>
         </div>
         <div>
@@ -103,6 +107,15 @@ const SignUp: React.FC = () => {
           <SignButton onClick={handleModeSign}>
             {show ? "Sign Up" : "Sign In"}
           </SignButton>
+          {events === "form" && (
+            <p className="err">
+              <b>Complete the form</b>
+            </p>
+          ) || events === "send" && (
+            <p className="send">
+              <b>Send Data</b>
+            </p>
+          )}
         </div>
       </SignInfo>
     </SignMain>

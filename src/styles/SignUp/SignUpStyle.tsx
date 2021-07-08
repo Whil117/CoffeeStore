@@ -5,6 +5,7 @@ export const SignMain = styled.main`
   height: 100vh;
   background: #ffffff;
   display: flex;
+  font-family: Inter;
 `;
 export const SignForm = styled.form`
   display: flex;
@@ -18,7 +19,6 @@ export const SignForm = styled.form`
     box-shadow: 0px 0px 8px 1px rgba(0, 0, 0, 0.25);
     border-radius: 5px;
     margin: 0 0 30px 0;
-    font-family: Inter;
     font-size: 14px;
     &:hover{
       background: white;
@@ -36,8 +36,6 @@ export const SignForm = styled.form`
     height: 35px;
     background: #379869;
     border-radius: 5px;
-    font-family: Inter;
-    font-style: normal;
     font-weight: 600;
     font-size: 18px;
     &:hover {
@@ -45,18 +43,14 @@ export const SignForm = styled.form`
       color: rgb(55, 152, 105);
       box-shadow: 0px 0px 5px #379869;
     }
+    &:active {
+      background: #379869;
+      color: white;
+    }
   }
   label {
-    font-family: Inter;
-
     font-size: 18px;
-  }
-  p {
-    font-family: Inter;
-    font-style: normal;
-    font-weight: 600;
-    font-size: 18px;
-    color: #e32a2a;
+    margin: 0 0 10px 0;
   }
 `;
 export const SignInfo = styled.div`
@@ -66,8 +60,6 @@ export const SignInfo = styled.div`
   flex-direction: column;
 
   h1 {
-    font-family: Inter;
-    font-style: normal;
     font-weight: bold;
     font-size: 48px;
     color: #379869;
@@ -86,6 +78,12 @@ export const SignInfo = styled.div`
     justify-content: center;
     align-items: center;
     height: 100vh;
+    .err{
+      color: red;
+    }
+    .send{
+      color: #379869;
+    }
   }
 `;
 export const SignButton = styled.button`
@@ -98,6 +96,10 @@ export const SignButton = styled.button`
   color: black;
   text-decoration: none;
   &:hover {
+    text-decoration: underline;
+  }
+  &:active {
+    color: #379869;
     text-decoration: underline;
   }
 `;

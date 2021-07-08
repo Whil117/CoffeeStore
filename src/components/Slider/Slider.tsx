@@ -1,10 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
-import Image from "next/image";
 import React, { useState } from "react";
 import { Category, phrase, slider } from "../../assets/data";
-// import { SliderImg, SliderMain } from "../../styles/Slider/SliderStyle";
-import arrowBack from "../../../public/Images/arrow-left.svg";
-import arrowNext from "../../../public/Images/arrow-right.svg";
 import { SliderImg, SliderMain } from "../../styles/Slider/SliderStyle";
 
 const Slider: React.FC = () => {
@@ -27,7 +23,7 @@ const Slider: React.FC = () => {
         <h2>Our coffee’s</h2>
         <SliderImg>
           <button onClick={handleback}>
-            <Image src={arrowBack} alt="back" />
+            <img src="/Images/arrow-left.svg" alt="back" />
           </button>
           <div>
             <h3>{Category.Coffee[count]}</h3>
@@ -35,7 +31,7 @@ const Slider: React.FC = () => {
             <img src={`/Images/${slider[count]}`} alt={slider[count]} />
           </div>
           <button onClick={handleNext}>
-            <Image src={arrowNext} alt="next" />
+            <img src="/Images/arrow-right.svg" alt="next" />
           </button>
         </SliderImg>
       </SliderMain>

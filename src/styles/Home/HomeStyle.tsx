@@ -21,7 +21,7 @@ export const HomeArt = styled.div`
     p {
       font-size: 18px;
     }
-    button{
+    button {
       border: none;
       display: flex;
       align-items: center;
@@ -36,10 +36,14 @@ export const HomeArt = styled.div`
       font-family: Inter;
       font-size: 14px;
       color: white;
-      &:hover{
+      &:hover {
         background: white;
-        color:#379869;
+        color: #379869;
         box-shadow: 0px 0px 4px #379869;
+      }
+      &:active {
+        color: #ffffff;
+        background: #379869;
       }
     }
   }

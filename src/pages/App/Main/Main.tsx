@@ -10,6 +10,7 @@ import {
   CardErrorCheck,
   CardsMain,
 } from "../../../styles/Card/CardStyle";
+import { methodGet } from "./assets/methods";
 
 interface Coffee {
   Coffee: string;
@@ -18,27 +19,30 @@ interface Coffee {
   Grind: string;
   Week: string;
 }
+interface User {
+  auth: Boolean;
+  user: {
+    _id: any;
+    username: any;
+  };
+}
+const tokenLocal = () => {
+  if (typeof window !== "undefined") {
+    return localStorage.getItem("token") || "";
+  }
+};
 const Main: React.FC = () => {
   const [coins, setcoins] = useState(100);
-  const [UserName, setUserName] = useState('')
+  const [user, setUser] = useState<User>({} as User);
   const [coffee, setCoffee] = useState<Coffee>({} as Coffee);
-  const [auth, setAuth] = useState(false);
   const [show, setShow] = useState(false);
-  const [error, setError] = useState("");
+  const [msg, setMsg] = useState("");
 
   const handleCheck = (event: any) => {
     setCoffee({
       ...coffee,
       [event.target.name]: event.target.value,
     });
-  };
-  const handleBuy = () => {
-    if (coins > 0) {
-      setShow(false)
-      setcoins(coins - 10);
-    } else {
-      setError("error_coins")
-    }
   };
   const handleCheckCards = () => {
     if (
@@ -49,30 +53,45 @@ const Main: React.FC = () => {
       coffee.Week
     ) {
       setShow(true);
-      setError("");
+      setMsg("");
     } else {
-      setError("error_form");
+      setMsg("error_form");
     }
   };
 
-  const useFetch = (url: string) => {
-    fetch(url, {
-      method: "GET",
+  const methodPost = {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(coffee),
+  };
+
+  const useFetchData = async (site: string, method: any) => {
+    const url = `https://coffeeapi11.herokuapp.com/${site}`;
+    const resp = await fetch(url, {
+      ...method,
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
         token: `${localStorage.getItem("token") || ""}`,
       },
-    })
-      .then((resp) => resp.json())
-      .then((data) => {
-        console.log(data);
-        setUserName(data.user.username)
-        setAuth(data?.auth);
-      })
-      .catch((error) => console.log(error));
+    });
+    const data = await resp.json();
+    return data;
   };
-
+  
+  const handleBuy = () => {
+    if (coins > 0) {
+      setShow(false);
+      setcoins(coins - 10);
+      setMsg("datasend");
+      const info = useFetchData("data", methodPost).then((data) =>console.log(data))
+    } else {
+      setMsg("error_coins");
+    }
+  };
   useEffect(() => {
     const validInfo = Number(localStorage.getItem("COINS") || 0);
     setcoins(validInfo);
@@ -83,13 +102,20 @@ const Main: React.FC = () => {
   }, [coins]);
 
   useEffect(() => {
-    useFetch("https://coffeeapi11.herokuapp.com/me");
+    const data = useFetchData("me", methodGet)
+      .then((data) => setUser(data))
+      .catch((err) => console.log(err));
   }, []);
   return (
     <>
-      {auth ? (
+      {user.auth ? (
         <>
-          <Nav mode={false} coins={coins} username={UserName} setcoins={setcoins} />
+          <Nav
+            mode={false}
+            coins={coins}
+            username={user.user.username}
+            setcoins={setcoins}
+          />
           <CardsMain>
             <Cards
               check={coffee.Coffee}
@@ -137,17 +163,18 @@ const Main: React.FC = () => {
               category={Category.Week}
             />
             <button onClick={handleCheckCards}>Buy</button>
-            {error === "error_form" && (
+            {(msg === "error_form" && (
               <CardErrorCheck>
                 <b>Finish the form</b>
               </CardErrorCheck>
-            )}
+            )) ||
+              (msg === "datasend" && <p>Coffee Send</p>)}
           </CardsMain>
           {show && (
             <CardBuyDiv>
               <CardBuy>
                 <h2>¿Do you want to buy this coffee?</h2>
-                {error === "error_coins" && (
+                {msg === "error_coins" && (
                   <p>
                     <b>You have no coins</b>
                   </p>

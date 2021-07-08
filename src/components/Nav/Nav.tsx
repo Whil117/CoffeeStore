@@ -1,10 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import React from "react";
-import Image from "next/image";
 import { useRouter } from "next/router";
 import { NavButton, NavMain } from "../../styles/Nav/NavStyle";
-import Menu from "../../../public/Images/menu.svg";
-// import Update from "../../../public";
 import { CardCoins } from "../../styles/Card/CardStyle";
 
 interface Props {
@@ -15,7 +12,6 @@ interface Props {
 }
 const Nav: React.FC<Props> = ({ mode, coins, setcoins, username }) => {
   const router = useRouter();
-
   return (
     <NavMain>
       <CardCoins>
@@ -25,16 +21,21 @@ const Nav: React.FC<Props> = ({ mode, coins, setcoins, username }) => {
             true
           ) : (
             <>
-              <h3>{username}</h3>
-              <p>Coins:{coins}</p>
-              <button onClick={() => setcoins(100)}>
-                <img src="/Images/el_refresh.svg" alt="update" />
-              </button>
+              {coins ? (
+                <>
+                  <h3>{username}</h3>
+                  <p>Coins:{coins}</p>
+                  <button onClick={() => setcoins(100)}>
+                    <img src="/Images/el_refresh.svg" alt="update" />
+                  </button>
+                </>
+              ) : (
+                false
+              )}
             </>
           )}
         </div>
       </CardCoins>
-
       {mode ? (
         <NavButton
           menu={true}
@@ -45,7 +46,7 @@ const Nav: React.FC<Props> = ({ mode, coins, setcoins, username }) => {
         </NavButton>
       ) : (
         <NavButton menu={false}>
-          <Image src={Menu} alt="menu" />
+          <img src="/Images/menu.svg" alt="menu" />
         </NavButton>
       )}
     </NavMain>

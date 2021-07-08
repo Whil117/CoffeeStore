@@ -3,8 +3,8 @@ import { SignForm } from "../../styles/SignUp/SignUpStyle";
 
 interface Props {
   btnname: string;
-  handleSubmit: (evt: any) => void;
-  handleChange: (evt: any) => void;
+  handleSubmit: any;
+  handleChange: any;
   user: {
     username: string;
     password: string;
@@ -38,11 +38,6 @@ const Form: React.FC<Props> = ({
           id="pass"
         />
         <button type="submit">{btnname}</button>
-        {/* {showError && (
-          <p>
-            <b>Rellena el formulario</b>
-          </p>
-        )} */}
       </SignForm>
     </>
   );

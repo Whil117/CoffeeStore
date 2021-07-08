@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ChangeEventHandler } from "react";
 import { Card, CardDiv } from "../../styles/Card/CardStyle";
 
 interface Props {
@@ -8,8 +8,7 @@ interface Props {
   width: string;
   check:string
   name:string
-
-  handleCheck: (event: any) => void
+  handleCheck: ChangeEventHandler<HTMLInputElement>
 }
 
 const Cards: React.FC<Props> = ({ category, title, flow, width,name,handleCheck,check }) => {
