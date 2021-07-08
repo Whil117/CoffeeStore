@@ -1,4 +1,5 @@
 import React, { ChangeEventHandler } from "react";
+import { Category } from "../../../../assets/data";
 import Cards from "../../../../components/Cards/Cards";
 
 interface Props {
@@ -9,18 +10,10 @@ interface Props {
     Grind: string;
     Week: string;
   };
-  Category:{
-      Coffee:string[]
-      Type:string[]
-      With:string[]
-      Grind:string[]
-      Week:string[]
-      titles:string[]
-  }
   handleCheck:ChangeEventHandler<HTMLInputElement>
 }
 
-const SelectCards: React.FC<Props> = ({ coffee,handleCheck,Category }) => {
+const SelectCards: React.FC<Props> = ({ coffee,handleCheck }) => {
   return (
     <>
       <Cards

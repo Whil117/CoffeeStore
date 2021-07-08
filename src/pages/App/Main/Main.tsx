@@ -1,6 +1,5 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import React, { useState, useEffect } from "react";
-import { Category } from "../../../assets/data";
 import Nav from "../../../components/Nav/Nav";
 import {
   CardBuy,
@@ -124,7 +123,6 @@ const Main: React.FC = () => {
             <SelectCards
               coffee={coffee}
               handleCheck={handleCheck}
-              Category={Category}
             />
             <button onClick={handleCheckCards}>Buy</button>
             {(msg === "error_form" && (
