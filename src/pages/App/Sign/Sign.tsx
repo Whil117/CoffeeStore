@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable @next/next/no-img-element */
-import React, { useState } from "react";
+import { useState,FC } from "react";
 import { useRouter } from "next/router";
 import Form from "../../../components/Form/Form";
 import {
@@ -17,7 +17,7 @@ const User = {
   password: "",
 };
 
-const SignUp: React.FC = () => {
+const SignUp: FC = () => {
   const [user, setUser] = useState<Count>(User as Count);
   const [show, setShow] = useState(false);
   const [events, setEvents] = useState("");

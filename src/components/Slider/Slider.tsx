@@ -1,12 +1,10 @@
 /* eslint-disable @next/next/no-img-element */
-import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Global, css } from "@emotion/react";
 import SwiperCore, { Navigation, Pagination } from "swiper";
 import { slider, phrase, Category } from "../../assets/data";
 import styled from "@emotion/styled";
+import { FC } from "react";
 
-SwiperCore.use([Navigation, Pagination]);
 
 const SwiperModifique = styled(Swiper)`
   width: 95%;
@@ -34,7 +32,9 @@ const SwiperInfo = styled.div`
     position: absolute;
   }
 `;
-const Slider: React.FC = () => {
+SwiperCore.use([Navigation, Pagination]);
+
+const Slider:FC = () => {
   return (
     <>
       <SwiperModifique navigation pagination>

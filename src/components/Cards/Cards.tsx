@@ -1,4 +1,4 @@
-import React, { ChangeEventHandler } from "react";
+import { ChangeEventHandler, FC } from "react";
 import { Card, CardDiv } from "../../styles/Card/CardStyle";
 
 interface Props {
@@ -8,10 +8,10 @@ interface Props {
   width: string;
   check:string
   name:string
-  handleCheck: ChangeEventHandler<HTMLInputElement>
+  handleChange: ChangeEventHandler<HTMLInputElement>
 }
 
-const Cards: React.FC<Props> = ({ category, title, flow, width,name,handleCheck,check }) => {
+const Cards: FC<Props> = ({ category, title, flow = "false", width = "false",name,handleChange,check }) => {
 
   return (
     <div>
@@ -25,7 +25,7 @@ const Cards: React.FC<Props> = ({ category, title, flow, width,name,handleCheck,
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Amet,
               </p>
             </Card>
-            <input type="radio" id={`Card${item}`} onChange={handleCheck} value={item.toString()} name={name} />
+            <input type="radio" id={`Card${item}`} onChange={handleChange} value={item.toString()} name={name} />
           </div>
         ))}
       </CardDiv>

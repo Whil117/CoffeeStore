@@ -1,12 +1,11 @@
 /* eslint-disable @next/next/no-img-element */
-import React from "react";
+import { FC } from "react";
 import { useRouter } from "next/router";
 import Image from 'next/image'
 import { HomeArt, HomeMain } from "../../../styles/Home/HomeStyle";
 import logo1 from '../../../../public/Images/1.jpg'
 
-// import 'swiper/swiper'
-const Home: React.FC = () => {
+const Home:FC = () => {
   const router = useRouter();
   return (
     <HomeMain>

@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import React from "react";
+import { FC } from "react";
 import { CoffeeBox } from "../../styles/Coffee/CoffeeStyle";
 
 interface Props {
@@ -13,7 +13,7 @@ interface Props {
     }
 }
 
-const Coffee:React.FC<Props> = ({coffee}) => {
+const Coffee:FC<Props> = ({coffee}) => {
   return (
     <CoffeeBox key={coffee?._id}>
       <img src={`/Images/coffees/${coffee.Coffee}.png`} alt={coffee.Coffee} />

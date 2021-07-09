@@ -1,4 +1,4 @@
-import React from "react";
+import { FC } from "react";
 import { SignForm } from "../../styles/SignUp/SignUpStyle";
 
 interface Props {
@@ -11,7 +11,7 @@ interface Props {
   };
 }
 
-const Form: React.FC<Props> = ({
+const Form: FC<Props> = ({
   user,
   btnname,
   handleSubmit,

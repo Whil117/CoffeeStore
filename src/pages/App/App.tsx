@@ -1,4 +1,4 @@
-import React, {  FC } from "react";
+import { FC } from "react";
 import Home from "./Home/Home";
 import Nav from "../../components/Nav/Nav";
 import Slider from "../../components/Slider/Slider";
@@ -11,9 +11,15 @@ const MainApp = styled.main`
 const App: FC = () => {
   return (
     <MainApp>
-      <Nav mode={true} coins={false}  setcoins={false} username={''} ModeCoins={false}/>
+      <Nav
+        mode={true}
+        coins={false}
+        setcoins={false}
+        username={""}
+        ModeCoins={false}
+      />
       <Home />
-      <Slider/>
+      <Slider />
     </MainApp>
   );
 };

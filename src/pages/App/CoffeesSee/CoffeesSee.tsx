@@ -1,6 +1,7 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/no-unescaped-entities */
 /* eslint-disable react-hooks/rules-of-hooks */
-import React, { useState, useEffect } from "react";
+import  { useState, useEffect, FC } from "react";
 import Coffee from "../../../components/Coffee/Coffee";
 import Nav from "../../../components/Nav/Nav";
 import { CoffeeOrders } from "../../../styles/Coffee/CoffeeStyle";
@@ -20,7 +21,7 @@ interface Data {
     username: string;
   };
 }
-const CoffeesSee: React.FC = () => {
+const CoffeesSee: FC = () => {
   const [coffees, setCoffees] = useState<Coffee[]>([]);
   const [data, setData] = useState<Data>({} as Data);
   const router = useRouter();

@@ -10,16 +10,16 @@ interface Props {
     Grind: string;
     Week: string;
   };
-  handleCheck:ChangeEventHandler<HTMLInputElement>
+  handleChange:ChangeEventHandler<HTMLInputElement>
 }
 
-const SelectCards: React.FC<Props> = ({ coffee,handleCheck }) => {
+const SelectCards: React.FC<Props> = ({ coffee,handleChange }) => {
   return (
     <>
       <Cards
         check={coffee?.Coffee}
         name="Coffee"
-        handleCheck={handleCheck}
+        handleChange={handleChange}
         width="true"
         flow="true"
         title={Category?.titles[0]}
@@ -28,7 +28,7 @@ const SelectCards: React.FC<Props> = ({ coffee,handleCheck }) => {
       <Cards
         check={coffee?.Type}
         name="Type"
-        handleCheck={handleCheck}
+        handleChange={handleChange}
         width="false"
         flow="false"
         title={Category?.titles[1]}
@@ -37,7 +37,7 @@ const SelectCards: React.FC<Props> = ({ coffee,handleCheck }) => {
       <Cards
         check={coffee?.With}
         name="With"
-        handleCheck={handleCheck}
+        handleChange={handleChange}
         width="false"
         flow="false"
         title={Category.titles[2]}
@@ -46,7 +46,7 @@ const SelectCards: React.FC<Props> = ({ coffee,handleCheck }) => {
       <Cards
         check={coffee?.Grind}
         name="Grind"
-        handleCheck={handleCheck}
+        handleChange={handleChange}
         width="false"
         flow="false"
         title={Category?.titles[3]}
@@ -55,7 +55,7 @@ const SelectCards: React.FC<Props> = ({ coffee,handleCheck }) => {
       <Cards
         check={coffee?.Week}
         name="Week"
-        handleCheck={handleCheck}
+        handleChange={handleChange}
         width="false"
         flow="false"
         title={Category?.titles[4]}
