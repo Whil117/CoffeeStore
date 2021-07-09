@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import Coffee from "../../../components/Coffee/Coffee";
 import Nav from "../../../components/Nav/Nav";
 import { CoffeeOrders } from "../../../styles/Coffee/CoffeeStyle";
+import { useRouter } from "next/router";
 
 interface Coffee {
   _id: any;
@@ -22,8 +23,10 @@ interface Data {
 const CoffeesSee: React.FC = () => {
   const [coffees, setCoffees] = useState<Coffee[]>([]);
   const [data, setData] = useState<Data>({} as Data);
+  const router = useRouter();
 
-  const useFetch = async (url: string) => {
+  const useFetch = async (site: string) => {
+    const url = `https://coffeeapi11.herokuapp.com/${site}`;
     const resp = await fetch(url, {
       method: "GET",
       headers: {
@@ -38,17 +41,18 @@ const CoffeesSee: React.FC = () => {
 
   useEffect(() => {
     if (true) {
-      useFetch("https://coffeeapi11.herokuapp.com/data").then((data) =>
-        setCoffees(data)
-      );
+      useFetch("data").then((data) => setCoffees(data));
     }
     if (true) {
-      useFetch("https://coffeeapi11.herokuapp.com/me").then((data) =>
-        setData(data)
+      useFetch("me").then((data) =>
+        data
+          ? setData(data)
+          : setTimeout(() => {
+              router.replace("/");
+            }, 5000)
       );
     }
   }, []);
-
 
   return (
     <>

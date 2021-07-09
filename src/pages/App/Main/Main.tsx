@@ -1,6 +1,8 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react-hooks/rules-of-hooks */
 import React, { useState, useEffect } from "react";
 import Nav from "../../../components/Nav/Nav";
+import { useRouter } from "next/router";
 import {
   CardBuy,
   CardBuyButton,
@@ -24,26 +26,21 @@ interface User {
     username: any;
   };
 }
-const methodGet = {
-  method: "GET",
-  headers: {
-    Accept: "application/json",
-    "Content-Type": "application/json",
-  },
-};
 
 const Main: React.FC = () => {
   const [coins, setcoins] = useState(100);
   const [user, setUser] = useState<User>({} as User);
   const [coffee, setCoffee] = useState<Coffee>({
-    Coffee:'',
-    Type:'',
-    With:'',
-    Grind:'',
-    Week:''
+    Coffee: "",
+    Type: "",
+    With: "",
+    Grind: "",
+    Week: "",
   } as Coffee);
   const [show, setShow] = useState(false);
   const [msg, setMsg] = useState("");
+  const router = useRouter();
+
 
   const handleCheck = (event: any) => {
     setCoffee({
@@ -65,7 +62,9 @@ const Main: React.FC = () => {
       setMsg("error_form");
     }
   };
-
+  const methodGet = {
+    method: "GET",
+  };
   const methodPost = {
     method: "POST",
     body: JSON.stringify(coffee),
@@ -97,11 +96,10 @@ const Main: React.FC = () => {
     return isValidCoins;
   };
   useEffect(() => {
-    const validInfo = Number(localStorage.getItem("COINS") || 0);
-    setcoins(validInfo);
+    setcoins(Number(localStorage.getItem("COINS") || 0));
     useFetchData("me", methodGet)
-      .then((data) => setUser(data))
-      .catch((err) => console.log(err));
+      .then((data) => (data ? setUser(data) : setTimeout(() => {router.replace('/')}, 5000)))
+      .catch((err) => ( err ? (console.log(err),setTimeout(() => {router.replace('/')}, 5000)): false));
   }, []);
 
   useEffect((): void => {
@@ -120,10 +118,7 @@ const Main: React.FC = () => {
             ModeCoins={true}
           />
           <CardsMain>
-            <SelectCards
-              coffee={coffee}
-              handleCheck={handleCheck}
-            />
+            <SelectCards coffee={coffee} handleCheck={handleCheck} />
             <button onClick={handleCheckCards}>Buy</button>
             {(msg === "error_form" && (
               <CardErrorCheck>
