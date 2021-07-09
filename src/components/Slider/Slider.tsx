@@ -27,7 +27,7 @@ const SwiperInfo = styled.div`
   color: white;
   h3{
     position:absolute ;
-    margin:0  0 50px;
+    margin:0  0 60px 0;
   }
   p{
     width: 300px;
