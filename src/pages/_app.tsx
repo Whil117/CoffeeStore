@@ -1,14 +1,9 @@
 /* eslint-disable @next/next/no-page-custom-font */
+import 'swiper/swiper-bundle.css';
+import '../styles/style.css'
 import type { AppProps } from "next/app";
 import Head from "next/head";
-import { Global, css } from "@emotion/react";
-
-const Normalize = `
-  body{
-    margin:0;
-    padding:0;
-  }
-`;
+import { Global, css } from "@emotion/react"
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
   return (
@@ -35,7 +30,11 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
       </Head>
       <Global
         styles={css`
-          ${Normalize}
+           body{
+              margin:0;
+              padding:0;
+              box-sizing: border-box;
+            }
         `}
       />
       <Component {...pageProps} />

@@ -1,40 +1,53 @@
 /* eslint-disable @next/next/no-img-element */
-import React, { useState } from "react";
-import { Category, phrase, slider } from "../../assets/data";
-import { SliderImg, SliderMain } from "../../styles/Slider/SliderStyle";
+import React from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Global, css } from "@emotion/react";
+import SwiperCore, { Navigation, Pagination } from "swiper";
+import { slider, phrase, Category } from "../../assets/data";
+import styled from "@emotion/styled";
 
+SwiperCore.use([Navigation, Pagination]);
+
+const SwiperModifique = styled(Swiper)`
+  width: 95%;
+  height: 470px;
+`;
+const SwiperImage = styled.img`
+  width: 100%;
+  height: 430px;
+  object-fit: cover;
+  object-position: center;
+`;
+const SwiperInfo = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
+  h3{
+    position:absolute ;
+    margin:0  0 50px;
+  }
+  p{
+    width: 300px;
+    position: absolute;
+  }
+`;
 const Slider: React.FC = () => {
-  const [count, setCount] = useState(0);
-
-  const handleNext = () => {
-    const isValidCounter =
-      count >= slider.length - 1 ? setCount(0) : setCount(count + 1);
-    return isValidCounter;
-  };
-  const handleback = () => {
-    const isValidCounter =
-      count <= 0 ? setCount(slider.length - 1) : setCount(count - 1);
-    return isValidCounter;
-  };
-
   return (
     <>
-      <SliderMain>
-        <h2>Our coffee’s</h2>
-        <SliderImg>
-          <button onClick={handleback}>
-            <img src="/Images/arrow-left.svg" alt="back" />
-          </button>
-          <div>
-            <h3>{Category.Coffee[count]}</h3>
-            <p>{phrase[count]}</p>
-            <img src={`/Images/${slider[count]}`} alt={slider[count]} />
-          </div>
-          <button onClick={handleNext}>
-            <img src="/Images/arrow-right.svg" alt="next" />
-          </button>
-        </SliderImg>
-      </SliderMain>
+      <SwiperModifique navigation pagination>
+        {slider.map((item, index) => (
+          <SwiperSlide key={item}>
+            <SwiperInfo key={item} style={{}}>
+              <SwiperImage src={`/Images/${item}`} alt={Category.Coffee[index]} />
+              <h3>{Category.Coffee[index]}</h3>
+              <p>{phrase[index]}</p>
+            </SwiperInfo>
+          </SwiperSlide>
+        ))}
+      </SwiperModifique>
     </>
   );
 };

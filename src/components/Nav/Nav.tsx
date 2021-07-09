@@ -64,17 +64,15 @@ const Nav: React.FC<Props> = ({
     <NavMain>
       <CardCoins>
         <h1>Coffee Store</h1>
-        <div>
-          {ModeCoins && (
-            <>
-              <h3>{username}</h3>
-              <p>Coins:{coins}</p>
-              <button onClick={() => setcoins(100)}>
-                <img src="/Images/el_refresh.svg" alt="update" />
-              </button>
-            </>
-          )}
-        </div>
+        {ModeCoins && (
+          <div>
+            <h3>{username}</h3>
+            <p>Coins:{coins}</p>
+            <button onClick={() => setcoins(100)}>
+              <img src="/Images/el_refresh.svg" alt="update" />
+            </button>
+          </div>
+        )}
       </CardCoins>
       {mode ? (
         <NavButton

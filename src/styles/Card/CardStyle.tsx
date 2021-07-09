@@ -11,7 +11,7 @@ type Active = {
 export const CardCoins = styled.div`
   display: flex;
   justify-content: space-between;
-  width: 430px;
+  /* width: 430px; */
   font-family: Inter;
   div {
     display: flex;

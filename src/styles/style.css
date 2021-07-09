@@ -1,0 +1,12 @@
+
+:root{
+    --swiper-theme-color: #ffffff;
+    --swiper-theme-color-circle: #379869;
+}
+.swiper-pagination-bullet-active {
+    opacity: 1;
+    background:var(--swiper-theme-color-circle);
+  }
+.swiper-wrapper{
+    padding-inline-start: 0;
+}

@@ -9,6 +9,7 @@ export const NavMenuDiv = styled.div`
   align-items: flex-end;
 `
 export const NavMain = styled.nav`
+padding: 0 5px;
   display: flex;
   align-items: center;
   justify-content: space-around;
@@ -19,7 +20,7 @@ export const NavMain = styled.nav`
     font-family: Sedgwick Ave;
     font-style: normal;
     font-weight: normal;
-    font-size: 36px;
+    font-size: 28px;
   }
 `;
 export const NavButton = styled.button<Button>`
@@ -31,11 +32,11 @@ top: 25px;
   border-radius: 5px;
   font-family: Inter;
   font-style: normal;
-  font-weight: bold;
+  /* font-weight: bold; */
   font-size: 14px;
   border: none;
   padding: ${({ menu }) => (menu ? "10px" : "none")};
-  width: ${({ menu }) => (menu ? "90px" : "auto")};
+  width: auto;
   height: ${({ menu }) => (menu ? "42px" : "auto")};
   background: ${({ menu }) => (menu ? "#379869" : "white")};
   color: ${({ menu }) => (menu ? "#ffffff" : "none")};
