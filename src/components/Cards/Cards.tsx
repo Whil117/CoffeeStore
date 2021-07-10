@@ -1,6 +1,7 @@
-import { ChangeEventHandler, FC } from "react";
+import { ChangeEventHandler, FC, useContext } from "react";
 import { Card, CardDiv } from "../../styles/Card/CardStyle";
-
+import {ThemeContext} from '../../pages/App/Main/Main'
+import styled from "@emotion/styled";
 interface Props {
   category: string[];
   title: string;
@@ -11,15 +12,20 @@ interface Props {
   handleChange: ChangeEventHandler<HTMLInputElement>
 }
 
-const Cards: FC<Props> = ({ category, title, flow = "false", width = "false",name,handleChange,check }) => {
+const CardContainer  =styled.div`
+  color: ${({theme})=>theme === 'light' ? "black" : "white"};
+`
 
+const Cards: FC<Props> = ({ category, title, flow, width ,name,handleChange,check }) => {
+  const theme = useContext(ThemeContext)
+  console.log(theme)
   return (
-    <div>
+    <CardContainer theme={theme}>
       <h2>{title}</h2>
       <CardDiv flow={flow} width={width}>
         {category.map((item) => (
           <div key={`Key${item}`}>
-            <Card htmlFor={`Card${item}`} active={check === item}>
+            <Card htmlFor={`Card${item}`} active={check === item} theme={theme}>
               <h4>{item}</h4>
               <p>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Amet,
@@ -29,7 +35,7 @@ const Cards: FC<Props> = ({ category, title, flow = "false", width = "false",nam
           </div>
         ))}
       </CardDiv>
-    </div>
+    </CardContainer>
   );
 };
 

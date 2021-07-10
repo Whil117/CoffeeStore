@@ -1,10 +1,14 @@
 import styled from "@emotion/styled";
 
-export const HomeMain = styled.div`
+interface Theme {
+  theme:string
+}
+export const HomeMain = styled.div<Theme>`
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
   padding: 10px;
+
   img{
     margin: 10px;
     height: 623px;
@@ -16,6 +20,8 @@ export const HomeArt = styled.div`
   flex-direction: column;
   width: 419px;
   margin: 70px 70px;
+  color: ${({theme})=> theme ==="light" ? 'black' : ' white'};
+
   h2 {
     font-family: Sedgwick Ave;
     font-style: normal;
@@ -36,14 +42,13 @@ export const HomeArt = styled.div`
     background: #379869;
     border-radius: 5px;
     font-style: normal;
-    /* font-weight: bold; */
     font-family: Inter;
     font-size: 14px;
     color: white;
     &:hover {
-      background: white;
-      color: #379869;
-      box-shadow: 0px 0px 4px #379869;
+      background: none;
+      color: ${({theme})=>theme==="light" ? "#379869" : "#ffffff"};
+      box-shadow: 0px 0px 4px  ${({theme})=> theme ==="light" ? '#379869' : ' white'};;
     }
     &:active {
       color: #ffffff;

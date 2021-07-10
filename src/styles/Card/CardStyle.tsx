@@ -1,4 +1,6 @@
 import styled from "@emotion/styled";
+import { css } from "@emotion/react";
+
 
 interface Card {
   width: string;
@@ -6,12 +8,15 @@ interface Card {
 }
 type Active = {
   active: Boolean;
+  theme:string
 };
+interface Theme {
+  theme:string
+}
 
-export const CardCoins = styled.div`
+export const CardCoins = styled.div<Theme>`
   display: flex;
   justify-content: space-between;
-  /* width: 430px; */
   font-family: Inter;
   div {
     display: flex;
@@ -21,6 +26,12 @@ export const CardCoins = styled.div`
   }
   button {
     border: none;
+    background: none;
+    svg{
+      path{
+        fill:${({theme})=>theme === "light"? "black" : "white"};
+      }
+    }
   }
 `;
 export const Card = styled.label<Active>`
@@ -34,8 +45,12 @@ export const Card = styled.label<Active>`
   justify-content: center;
   padding: 15px;
   margin: 10px;
-  color: ${({ active }) => (active ? "white" : "black")};
-  background: ${({ active }) => (active ? " #379869" : "white")};
+  color: ${({ theme }) => (theme  === "light" ? "black" : "white")};
+  background: ${({theme})=> theme === "light" ? "white" : "#212734"};
+  ${({active})=>active && css`
+  color:white;
+      background:#379869 ;
+  `}
   p {
     font-family: Inter;
     font-style: normal;
@@ -61,7 +76,8 @@ export const CardsMain = styled.div`
   font-size: 14px;
   flex-direction: column;
   align-items: center;
-  margin: 0 0 50px 0;
+  background: ${({theme})=>theme ==="light" ? "white":"#242c3f"};
+  color: ${({theme})=> theme === "light" ? "black" : "white"};
   button {
     display: flex;
     align-items: center;
@@ -78,7 +94,8 @@ export const CardsMain = styled.div`
     font-weight: bold;
     font-size: 18px;
     &:hover {
-      background: white;
+      background: ${({theme})=>theme ==="light" ? "white":"#242c3f"};
+
       color: #379869;
       box-shadow: 0px 0px 4px #379869;
     }
@@ -105,7 +122,9 @@ export const CardBuyDiv = styled.div`
 export const CardBuy = styled.div`
   width: 522px;
   height: 290px;
-  background: #ffffff;
+  color: ${({theme})=> theme === "light" ? "black" : "white"};
+
+  background: ${({theme})=> theme === "light" ? "white" : "#212734"};
   border-radius: 5px;
   display: flex;
   flex-direction: column;
@@ -136,7 +155,7 @@ export const CardBuyButton = styled.button<Mode>`
   background: ${({ mode }) => (mode === "true" ? "#DA2525" : "#379869")};
   &:hover {
     color: ${({ mode }) => (mode === "true" ? "#DA2525" : "#379869")};
-    background-color: white;
+    background-color: ${({theme})=>theme === "light" ? "white" : "#212734"};
     box-shadow: 0 0 4px
       ${({ mode }) => (mode === "true" ? "#DA2525" : "#379869")};
   }

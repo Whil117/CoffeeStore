@@ -24,6 +24,8 @@ interface Data {
 const CoffeesSee: FC = () => {
   const [coffees, setCoffees] = useState<Coffee[]>([]);
   const [data, setData] = useState<Data>({} as Data);
+  const [theme, setTheme] = useState('light');
+  
   const router = useRouter();
 
   const useFetch = async (site: string) => {
@@ -41,6 +43,7 @@ const CoffeesSee: FC = () => {
   };
 
   useEffect(() => {
+    setTheme(localStorage.getItem("themew") || "light")
     if (true) {
       useFetch("data").then((data) => setCoffees(data));
     }
@@ -65,6 +68,7 @@ const CoffeesSee: FC = () => {
             setcoins={false}
             username={data.user.username}
             ModeCoins={false}
+            theme={theme}
           />
           <CoffeeOrders>
             <h2>Your Order's</h2>

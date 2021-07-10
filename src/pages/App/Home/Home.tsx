@@ -5,11 +5,14 @@ import Image from 'next/image'
 import { HomeArt, HomeMain } from "../../../styles/Home/HomeStyle";
 import logo1 from '../../../../public/Images/1.jpg'
 
-const Home:FC = () => {
+interface Props {
+  theme:string
+}
+const Home:FC<Props> = ({theme}) => {
   const router = useRouter();
   return (
-    <HomeMain>
-      <HomeArt>
+    <HomeMain theme={theme} >
+      <HomeArt theme={theme}>
           <h2>The Coffee you need</h2>
           <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam odio

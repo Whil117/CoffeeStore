@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react-hooks/rules-of-hooks */
-import { useState, useEffect, FC } from "react";
+import { useState, useEffect, FC, createContext } from "react";
 import Nav from "../../../components/Nav/Nav";
 import { useRouter } from "next/router";
 import {
@@ -33,6 +33,7 @@ const typesCoffee = {
   Grind: "",
   Week: "",
 };
+export const ThemeContext = createContext("");
 
 const Main: FC = () => {
   const [coins, setcoins] = useState(100);
@@ -40,6 +41,7 @@ const Main: FC = () => {
   const [coffee, setCoffee] = useState<Coffee>(typesCoffee as Coffee);
   const [show, setShow] = useState(false);
   const [msg, setMsg] = useState("");
+  const [theme, setTheme] = useState("light");
   const router = useRouter();
 
   const handleChange = (event: any) => {
@@ -96,6 +98,7 @@ const Main: FC = () => {
     return isValidCoins;
   };
   useEffect(() => {
+    setTheme(localStorage.getItem("themew") || "light");
     setcoins(Number(localStorage.getItem("COINS") || 0));
     useFetchData("me", methodGet)
       .then((data) =>
@@ -120,17 +123,18 @@ const Main: FC = () => {
   }, [coins]);
 
   return (
-    <>
+    <ThemeContext.Provider value={theme}>
       {user.auth ? (
-        <>
+        <main>
           <Nav
             mode={false}
             coins={coins}
             username={user.user.username}
             setcoins={setcoins}
             ModeCoins={true}
+            theme={theme}
           />
-          <CardsMain>
+          <CardsMain theme={theme}>
             <SelectCards coffee={coffee} handleChange={handleChange} />
             <button onClick={handleCheckCards}>Buy</button>
             {(msg === "error_form" && (
@@ -142,7 +146,7 @@ const Main: FC = () => {
           </CardsMain>
           {show && (
             <CardBuyDiv>
-              <CardBuy>
+              <CardBuy theme={theme}>
                 <h2>¿Do you want to buy this coffee?</h2>
                 {msg === "error_coins" && (
                   <p>
@@ -151,23 +155,24 @@ const Main: FC = () => {
                 )}
                 <div>
                   <CardBuyButton
+                  theme={theme}
                     onClick={() => setShow(false)}
                     mode={true.toString()}
                   >
                     Cancel
                   </CardBuyButton>
-                  <CardBuyButton onClick={handleBuy} mode={false.toString()}>
+                  <CardBuyButton theme={theme} onClick={handleBuy} mode={false.toString()}>
                     Acept
                   </CardBuyButton>
                 </div>
               </CardBuy>
             </CardBuyDiv>
           )}
-        </>
+        </main>
       ) : (
         <p>Not authorize</p>
       )}
-    </>
+    </ThemeContext.Provider>
   );
 };
 
