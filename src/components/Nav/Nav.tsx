@@ -29,7 +29,6 @@ const Nav: React.FC<Props> = ({
   mode,
   coins,
   setcoins,
-  username,
   ModeCoins,
   theme,
 }) => {
@@ -71,7 +70,6 @@ const Nav: React.FC<Props> = ({
         <h1>Coffee Store</h1>
         {ModeCoins && (
           <div>
-            <h3>{username}</h3>
             <p>Coins:{coins}</p>
             <button onClick={() => setcoins(100)}>
               <svg
