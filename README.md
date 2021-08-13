@@ -1,6 +1,8 @@
 # CoffeeStore v0.1
 Hi, My Project is about buy coffees. and you have 100 coins, that you can recharge when you want. The app needs more improvements. this is a first version.
 
+## Git
+-git clone https://github.com/WhiLEx117/CoffeeStore
 
 ## Getting Started
 
