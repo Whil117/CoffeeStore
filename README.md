@@ -1,6 +1,7 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# CoffeeStore v0.1
+Hi, My Project is about buy coffees. and you have 100 coins, that you can recharge when you want. The app needs more improvements. this is a first version.
 
-#CoffeeStore v0.1
+
 ## Getting Started
 
 First, run the development server:
